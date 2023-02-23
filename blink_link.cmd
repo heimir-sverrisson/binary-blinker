@@ -58,11 +58,12 @@ MEMORY
     VECTORS (X)  : origin=0x00000000 length=0x00000020
     FLASH0  (RX) : origin=0x00000020 length=0x000FFFE0
 */
-    VECTORS (X)  : origin=0x00010100 length=0x00000020
-    FLASH0  (RX) : origin=0x00010120 length=0x000EFEE0
+    VECTORS (X)  : origin=0x00010100 length=0x00000040
+    FLASH0  (RX) : origin=0x00010140 length=0x000EFEC0
 
     STACKS  (RW) : origin=0x08000000 length=0x00001500
-    RAM     (RW) : origin=0x08001500 length=0x0001EB00
+    RAM     (RW) : origin=0x08001500 length=0x0001EAE0
+    RAMVECTORS(RWX) : origin=0x0801FFE0 length=0x00000020
 
 /* USER CODE BEGIN (2) */
 /* USER CODE END */
@@ -79,12 +80,13 @@ SECTIONS
     .intvecs : {} > VECTORS
     .text    : {} > FLASH0 
     .const   : {} > FLASH0 
-    .cinit   : {} > FLASH0 
+    .cinit   : {} > FLASH0
+    .ovly    : {} > FLASH0
     .pinit   : {} > FLASH0 
     .bss     : {} > RAM
     .data    : {} > RAM
     .sysmem  : {} > RAM
-    
+    .ramIntvecs  : {} load=FLASH0, run=RAMVECTORS, palign=8, table(ram_undef)
 
 /* USER CODE BEGIN (4) */
 /* USER CODE END */

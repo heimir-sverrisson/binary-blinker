@@ -64,10 +64,13 @@
 
 #include "errata_SSWF021_45.h"
 /* USER CODE BEGIN (1) */
+#include "cpy_tbl.h"
+#include "interrupt_vectors_to_ram.h"
 /* USER CODE END */
 
 
 /* USER CODE BEGIN (2) */
+extern COPY_TABLE ram_undef;
 /* USER CODE END */
 
 
@@ -389,6 +392,12 @@ void _c_int00(void)
     _coreEnableRamEcc_();
 
 /* USER CODE BEGIN (39) */
+    // Write interrupt handler addresses to SRAM
+	copy_in(&ram_undef);
+	ramTabChangeEntry(ENTRY_UNDEF_ABORT, undef_handler);
+	ramTabChangeEntry(ENTRY_SWI, swi_handler);
+	ramTabChangeEntry(ENTRY_PREFETCH_ABORT, pabt_handler);
+	ramTabChangeEntry(ENTRY_DATA_ABORT, dabt_handler);
 /* USER CODE END */
 
     /* Start PBIST on all dual-port memories */
