@@ -12,6 +12,7 @@
 /* USER CODE BEGIN (1) */
 #include "het.h"
 #include "bl_run_target.h"
+#include "bl_watchdog.h"
 
 /* USER CODE END */
 
@@ -53,6 +54,7 @@ int main(void)
 
     for(;;)
     {
+    	kickWatchdog();
     	red = counter & 0x1;
     	yellow = counter & 0x2;
     	green = counter & 0x4;
@@ -63,10 +65,10 @@ int main(void)
     		;
     	counter--;
     	counter = (counter == -1) ? 7 : counter;
-    	if(++restart_counter > 16){
-    	    set_target(FLASH_LOADER);
-    		softReset();
-    	}
+//    	if(++restart_counter > 16){
+//    	    set_target(FLASH_LOADER);
+//    		softReset();
+//    	}
     }
 /* USER CODE END */
 
