@@ -29,8 +29,8 @@ MEMORY
     VECTORS (X)  : origin=0x00000000 length=0x00000020
     FLASH0  (RX) : origin=0x00000020 length=0x000FFFE0
 */
-    VECTORS (X)  : origin=0x00010100 length=0x00000040
-    FLASH0  (RX) : origin=0x00010140 length=0x000EFEC0
+    VECTORS (X)  : origin=0x00010000 length=0x00000040
+    FLASH0  (RX) : origin=0x00010040 length=0x000EFFC0
 
 	RUNTARGET (RW)  : origin=0x08000000 length=0x00000010
     STACKS  (RW)    : origin=0x08000010 length=0x000014F0
